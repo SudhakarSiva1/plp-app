@@ -1,0 +1,16 @@
+﻿<div class="col-md-6 offset-md-3 mt-3 app-container">
+    <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="auth">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" >BH PAPERLESS PICK ({{auth.org_code}})</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link" (click)="logout()">Logout</a>
+        </div>
+    </nav>
+    <div class="app-container" [ngClass]="{ 'bg-light': auth }">
+        <router-outlet></router-outlet>
+    </div>
+    <alert></alert>
+</div>
+
+<!-- main app container -->

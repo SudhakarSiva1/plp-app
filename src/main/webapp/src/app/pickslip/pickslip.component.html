@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="form">
+            <div class="form-group readonly">
+                <label for="pickslip" class="form-control-plaintext">Pickslip</label>
+                <input type="text" readonly class="form-control-plaintext" id="pickslip" [value]="pickslip.pick_slip_number">
+            </div>
+            <div class="form-group readonly">
+                <label for="customer" class="form-control-plaintext">Customer</label>
+                <input type="text" readonly class="form-control-plaintext" id="customer" [value]="pickslip.customer_name">
+            </div>
+            <div class="form-group readonly">
+                <label for="tpl" class="form-control-plaintext">TPL</label>
+                <input type="text" readonly class="form-control-plaintext" id="tpl" [value]="pickslip.tpl">
+            </div>
+            <div class="form-group">
+                <label for="container">Container Type</label>
+                <select class="form-control" formControlName="container" id="container" (change)='onContainerChange($event)'>
+                    <option *ngFor="let c of containers" [value]="c.flex_value"> {{c.description}} </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pallet">Pallet Tare</label>
+                <input type="number" formControlName="pallet" (focusout)="onPalletFocusOut($event)" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pallet.errors }" />
+                <div *ngIf="submitted && f.pallet.errors" class="invalid-feedback">
+                    <div *ngIf="f.pallet.errors.required">Please provide valid pallet tare</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="printer">Label Printer</label>
+                <input type="text" formControlName="printer" (focusout)="onPrinterFocusOut($event)" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.printer.errors }" />
+                <div *ngIf="submitted && f.printer.errors" class="invalid-feedback">
+                    <div *ngIf="f.printer.errors.required">Please enter label printer</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="printLoading" (click)="submitForm('print')" class="btn btn-primary">
+                    <span *ngIf="printLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Print/Reprint
+                </button>
+                <button [disabled]="pickingLoading" (click)="submitForm('picking')" class="btn btn-primary picking">
+                    <span *ngIf="pickingLoading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Picking
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

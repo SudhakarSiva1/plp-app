@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+entry.point: http://localhost:8080
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@bhpdbnp01-vip.bhp.syntaxconnect.net:1521/EBSDV03
+    username: apps
+    password: wmsupgdr1204
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/static,classpath:/static/,classpath:/public/
+security.oauth2.resource.jwt.key-value: ZHQT#123
+
+config:
+  oauth2:
+    clientId: plp
+    clientSecret: Plp@123
+    signInKey: ZHQT#123
+    #    720 hours (30 days)
+    accessTokenExpiry: 2592000
+    refreshTokenExpiry: 7776000
